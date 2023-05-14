@@ -1,3 +1,5 @@
+global.downloadDir = '/Users/awesomesajee/Documents/WDIO/wdio/tempdir';
+
 export const config = {
     //
     // ====================
@@ -53,7 +55,12 @@ export const config = {
     //
     capabilities: [{
         // capabilities for local browser web tests
-        browserName: 'chrome' // or "firefox", "microsoftedge", "safari"
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            prefs: {
+                'download.default_directory': downloadDir
+            }
+        } // or "firefox", "microsoftedge", "safari"
     }],
     //
     // ===================
@@ -214,8 +221,9 @@ export const config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: function (test, context) {
+        browser.maximizeWindow()
+    },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)

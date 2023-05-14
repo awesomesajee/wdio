@@ -1,8 +1,8 @@
 import Page from "../pageobjects/page.js";
 
 class LoginPage extends Page {
-    get usernameTextBox() {
-        return $('#user-name');
+    async GettextField(placeholder) {
+        return $(`//input[@placeholder='${placeholder}']`);
     }
 
     get passwordTextbox() {
@@ -17,14 +17,19 @@ class LoginPage extends Page {
         return $('div=Swag Labs')
     }
 
-    async login(username, password, welcomeMessage) {
-        await this.usernameTextBox.setValue(username)
-        await this.passwordTextbox.setValue(password)
+
+    async login(textfieldName, textfieldOther, username, password) {
+        await (await this.GettextField(textfieldName)).setValue(username)
+        await (await this.GettextField(textfieldOther)).setValue(password)
         await this.loginButton.click()
+
+    }
+
+    async verifyMessage(welcomeMessage) {
         await expect(this.welcomePageHeader).toHaveText(welcomeMessage)
     }
 
-    open () {
+    open() {
         return super.open();
     }
 
