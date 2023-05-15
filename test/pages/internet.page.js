@@ -6,8 +6,8 @@ class InternetPage {
     clickLinkByText(linkText) {
         $(`//a[contains(text(), '${linkText}')]`).click();
     }
-    getElementByHeaderText(headerText) {
-        return $(`//h3[contains(text(), '${headerText}')]`)
+    get getElementByHeaderText() {
+        return $('//div[@id="content"]/div/h3')
     }
     getButtonByText(buttonText) {
         return $(`//button[contains(text(), '${buttonText}')]`)
@@ -25,8 +25,8 @@ class InternetPage {
         return $(`//select[@id="dropdown"]/option[contains(text(), '${text}')]`)
     } 
     
-    async getTheLinkToDownload(linkText) {
-        return await $(`//a[contains(text(), '${linkText}')]`)
+    getTheLinkToDownload(linkText) {
+        return  $(`//a[contains(text(), '${linkText}')]`)
     }
 
 }

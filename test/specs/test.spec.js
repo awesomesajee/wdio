@@ -1,4 +1,5 @@
 import InternetPage from "../pages/internet.page.js";
+import Utilities from "../pages/utilities.page.js";
 
 
 describe('Verify navigating to a link', () => {
@@ -10,7 +11,7 @@ describe('Verify navigating to a link', () => {
         await InternetPage.clickLinkByText('A/B Testing')
     })
     it("Verify Header of the navigated page", async () => {
-        await expect(InternetPage.getElementByHeaderText('A/B Test Variation 1')).toHaveTextContaining(['A/B Test Variation 1', 'A/B Test Control'])
+        await expect(InternetPage.getElementByHeaderText).toHaveTextContaining(['A/B Test Variation 1', 'A/B Test Control'])
     })
 })
 
@@ -79,9 +80,15 @@ describe('Download A File', () => {
     it("Click on the download file link", async () => {
         await InternetPage.clickLinkByText('File Download');
         await browser.pause(3000);
+    })
+    it("Click on the file which wants to download", async () => {
         const link = await InternetPage.getTheLinkToDownload('sample.png')
         await link.click()
-        await browser.pause(3000);
+        await browser.pause(5000);
+        await Utilities.readFilesFromFolder('sample.png', (content) => {
+            console.log("File is available", content)
+        });
+       
     })
     
 
